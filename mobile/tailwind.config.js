@@ -3,7 +3,9 @@ module.exports = {
       extend: {
         colors: {
           "headerBackground": "#141419",
-          "homeBackground": "#191920"
+          "homeBackground": "#191920",
+          "redButton": "#F8375D",
+          "itemDescriptionGray": "#333333"
         }
       },
     },

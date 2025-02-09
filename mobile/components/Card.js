@@ -4,20 +4,30 @@ import tw from '../lib/tailwind';
 
 const Card = ({ descricao, preco, imagem, onAddToCart  }) => {
   return (
-    <View style={[styles.card, tw`bg-white`]}>
+    <View style={[styles.card, tw`bg-white flex`]}>
       {/* Exibir a imagem */}
       {imagem ? (
-        <Image source={{ uri: imagem }} style={styles.image} />
+        <Image source={{ uri: imagem }} style={[styles.image, tw`self-center`]} />
       ) : (
         <Text style={styles.errorText}>Imagem não disponível</Text>
       )}
 
       {/* Exibir descrição e preço */}
-      <Text style={styles.description}>{descricao}</Text>
-      <Text style={styles.price}>{preco}</Text>
+      <View style={tw`px-2`}>
+      <Text style={[styles.description, tw`text-itemDescriptionGray`]}>{descricao}</Text>
+      <Text style={[styles.price, tw`self-start, font-bold my-2`]}>R${preco}</Text>
+      </View>
 
       {/* Botão de adicionar ao carrinho */}
-      <TouchableOpacity style={styles.button} onPress={onAddToCart}>
+      <TouchableOpacity style={[styles.button, tw`bg-redButton rounded-4px mt-2`]} onPress={onAddToCart}>
+        {/* Fundo escuro com opacidade */}
+        <View style={tw`absolute bg-black top-0 left-0 rounded-l-[4px] h-full w-12 opacity-20`} />
+
+        {/* Texto da quantidade sem opacidade */}
+        <View style={tw`absolute top-0 left-0 h-full w-12 flex items-center justify-center`}>
+            <Text style={tw`text-white font-bold`}>1</Text>
+        </View>
+
         <Text style={styles.buttonText}>Adicionar ao Carrinho</Text>
       </TouchableOpacity>
     </View>
@@ -25,30 +35,29 @@ const Card = ({ descricao, preco, imagem, onAddToCart  }) => {
 };
 
 const styles = StyleSheet.create({
-  card: { 
-    padding: 15, 
+  card: {
+    height:358,
+    width: 338,
+    padding: 20, 
     borderWidth: 1, 
-    borderRadius: 8, 
-    marginBottom: 10,
-    alignItems: 'center'
+    borderRadius: 4, 
+    marginBottom: 10
   },
   image: { 
-    width: 200, 
+    width: 217, 
     height: 200, 
     marginBottom: 10
   },
   description: { 
-    fontSize: 18 
+    fontSize: 16
   },
   price: { 
-    fontSize: 16, 
-    color: 'green', 
-    marginBottom: 10 
+    fontSize: 21,
+    marginBottom: 10
   },
   button: { 
     backgroundColor: 'blue', 
-    padding: 10, 
-    borderRadius: 5 
+    padding: 10
   },
   buttonText: { 
     color: 'white', 
