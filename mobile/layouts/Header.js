@@ -6,12 +6,16 @@ import tw from '../lib/tailwind';
 import { useCart } from '../context/CartContext';
 import Logo from '../assets/LogoQuality.png';
 import CartIcon from '../assets/CartIcon.png'; // Ícone do carrinho
+import statusBar from '../assets/statusBar.png';
+
 
 const Header = () => {
   const navigation = useNavigation();
   const { cart } = useCart(); // Pegando o carrinho do contexto
 
   return (
+    <View>
+    <Image source={statusBar} style={tw`w-[375px] h-[20px] bg-headerBackground`} resizeMode="contain"/>
     <View style={tw`bg-headerBackground flex flex-row justify-between items-center py-4 px-6`}>
       {/* Logo */}
       <TouchableOpacity onPress={() => navigation.navigate('Shoes', { cart })}>
@@ -30,6 +34,7 @@ const Header = () => {
           </View>
         )}
       </TouchableOpacity>
+    </View>
     </View>
   );
 };
