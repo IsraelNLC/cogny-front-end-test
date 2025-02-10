@@ -15,20 +15,20 @@ const Card = ({ descricao, preco, imagem, onAddToCart  }) => {
       {/* Exibir descrição e preço */}
       <View style={tw`px-2`}>
       <Text style={[styles.description, tw`text-itemDescriptionGray`]}>{descricao}</Text>
-      <Text style={[styles.price, tw`self-start, font-bold my-2`]}>R${preco}</Text>
+      <Text style={[styles.price, tw`font-bold my-2`]}>R${preco}</Text>
       </View>
 
       {/* Botão de adicionar ao carrinho */}
       <TouchableOpacity style={[styles.button, tw`bg-redButton rounded-4px mt-2`]} onPress={onAddToCart}>
         {/* Fundo escuro com opacidade */}
-        <View style={tw`absolute bg-black top-0 left-0 rounded-l-[4px] h-full w-12 opacity-20`} />
+        <View style={tw`absolute bg-black top-0 left-0 rounded-l-[4px] h-full w-[81px] opacity-20`} />
 
         {/* Texto da quantidade sem opacidade */}
-        <View style={tw`absolute top-0 left-0 h-full w-12 flex items-center justify-center`}>
+        <View style={tw`absolute top-0 left-0 h-full w-[81px] flex items-center justify-center`}>
             <Text style={tw`text-white font-bold`}>1</Text>
         </View>
 
-        <Text style={[styles.buttonText, tw`font-bold text-[14px]`]}>Adicionar ao Carrinho</Text>
+        <Text style={[styles.buttonText, tw`font-bold text-[14px] ml-14`]}>ADICIONAR</Text>
       </TouchableOpacity>
     </View>
   );

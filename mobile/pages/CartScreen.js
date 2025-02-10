@@ -1,16 +1,20 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TextInput, TouchableOpacity, Modal, Alert } from 'react-native';
 import tw from '../lib/tailwind';
 import Header from '../layouts/Header';
+import { useCart } from '../context/CartContext';
 
 const CartScreen = ({ route }) => {
-  const { cart } = route.params || { cart: [] };
+  const { cart, setCart } = useCart(); // Pegando do contexto global
 
   // Estado para armazenar a quantidade de cada item no carrinho
   const [quantities, setQuantities] = useState(cart.reduce((acc, item) => {
     acc[item.id] = "1"; // Inicialmente, cada item tem quantidade "1" como string
     return acc;
   }, {}));
+
+  // Estado para controle do modal
+  const [isModalVisible, setModalVisible] = useState(false);
 
   // Função para atualizar a quantidade
   const handleQuantityChange = (id, value) => {
@@ -26,6 +30,18 @@ const CartScreen = ({ route }) => {
       return sum + (parseInt(quantities[item.id] || "1", 10) * item.preco);
     }, 0);
   }, [cart, quantities]);
+
+  // Função para finalizar pedido
+  const handleFinalizeOrder = () => {
+    setModalVisible(true);
+  };
+
+  // Função para confirmar pedido e limpar carrinho
+  const confirmOrder = () => {
+    setModalVisible(false);
+    setCart([]); // Esvazia o carrinho
+    Alert.alert("Sucesso", "Seu pedido foi finalizado com sucesso! 🎉");
+  };
 
   return (
     <View style={[tw`bg-gray-700`]}>
@@ -81,7 +97,7 @@ const CartScreen = ({ route }) => {
               </Text>
             </View>
             <TouchableOpacity style={tw`bg-redButton rounded-4px mb-4 p-[10px]`}>
-              <Text style={tw`text-center text-white font-bold text-[14px]`}>Finalizar Pedido</Text>
+              <Text style={tw`text-center text-white font-bold text-[14px]`} onPress={handleFinalizeOrder}>FINALIZAR PEDIDO</Text>
             </TouchableOpacity>
           </View>
           </>
@@ -90,6 +106,27 @@ const CartScreen = ({ route }) => {
       </View>
 
     </View>
+
+    {/* Modal de Confirmação */}
+    <Modal visible={isModalVisible} transparent animationType="slide">
+      <View style={[styles.modalContainer, tw`self-center w-[375px]`]}>
+        <View style={styles.modalContent}>
+          <Text style={tw`text-black text-[20px] font-bold text-center`}>
+            Pedido Finalizado! 🎉
+          </Text>
+          <Text style={tw`text-gray-500 text-[16px] text-center mt-2`}>
+            Obrigado por comprar conosco! Seu pedido foi registrado.
+          </Text>
+          <TouchableOpacity 
+            style={tw`bg-redButton rounded-[4px] mt-4 p-[10px]`}
+            onPress={confirmOrder}
+          >
+            <Text style={tw`text-center text-white px-2 font-bold text-[14px]`}>OK</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+
     </View>
   );
 };
@@ -101,6 +138,19 @@ const styles = StyleSheet.create({
     width: 80, 
     height: 80
   },
+  modalContainer: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  modalContent: { 
+    backgroundColor: 'white', 
+    padding: 20, 
+    borderRadius: 10, 
+    width: 300, 
+    alignItems: 'center' 
+  }
 });
 
 export default CartScreen;

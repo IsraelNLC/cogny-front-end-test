@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontWeight: 'bold',
-  },
+  }
 });
 
 export default Header;
