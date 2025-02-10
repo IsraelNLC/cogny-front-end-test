@@ -19,7 +19,7 @@ const ShoesScreen = () => {
 
   return (
     <View style={[tw`bg-gray-700`]}>
-    <View style={[tw`bg-homeBackground self-center min-w-[375px]`]}>
+    <View style={[tw`bg-homeBackground self-center min-w-[375px] min-h-screen`]}>
       <Header />
       <View style={[styles.container]}>
 
@@ -29,6 +29,7 @@ const ShoesScreen = () => {
         </TouchableOpacity> */}
 
         <FlatList
+          style={tw`rounded-[4px]`}
           data={mockProducts}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (

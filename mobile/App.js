@@ -6,6 +6,7 @@ import { StyleSheet, StatusBar} from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import tw from './lib/tailwind';
+import { useDeviceContext } from 'twrnc';
 
 import { CartProvider } from './context/CartContext';
 import ShoesScreen from "./pages/ShoesScreen";
@@ -15,6 +16,7 @@ import Header from './layouts/Header';
 const Stack = createStackNavigator();
 
 export default function app () {
+  useDeviceContext(tw);
   return (
     <CartProvider>
       <NavigationContainer >

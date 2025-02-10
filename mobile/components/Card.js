@@ -28,7 +28,7 @@ const Card = ({ descricao, preco, imagem, onAddToCart  }) => {
             <Text style={tw`text-white font-bold`}>1</Text>
         </View>
 
-        <Text style={styles.buttonText}>Adicionar ao Carrinho</Text>
+        <Text style={[styles.buttonText, tw`font-bold text-[14px]`]}>Adicionar ao Carrinho</Text>
       </TouchableOpacity>
     </View>
   );

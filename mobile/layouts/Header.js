@@ -14,7 +14,9 @@ const Header = () => {
   return (
     <View style={tw`bg-headerBackground flex flex-row justify-between items-center py-4 px-6`}>
       {/* Logo */}
-      <Image source={Logo} style={styles.image} resizeMode="contain" />
+      <TouchableOpacity onPress={() => navigation.navigate('Shoes', { cart })}>
+      <Image source={Logo} style={styles.image} resizeMode="contain"/>
+      </TouchableOpacity>
 
       {/* Botão do Carrinho */}
       <TouchableOpacity style={styles.cartButton} onPress={() => navigation.navigate('Cart', { cart })}>
